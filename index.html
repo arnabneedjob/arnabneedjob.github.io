@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arnab — Personal Universe</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Anton&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #11110f;
+  color: #f2eee4;
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 7%;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+}
+
+nav a {
+  color: #f2eee4;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 8%;
+  position: relative;
+  overflow: hidden;
+}
+
+.tag {
+  color: #f5d43b;
+  letter-spacing: 4px;
+  font-size: 11px;
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(75px, 17vw, 190px);
+  line-height: .85;
+  letter-spacing: -4px;
+  position: relative;
+  z-index: 2;
+  animation: appear 1.2s ease both;
+}
+
+h1 span { color: #f5d43b; }
+
+.hero p {
+  margin-top: 35px;
+  max-width: 380px;
+  line-height: 1.8;
+  color: #aaa79f;
+  font-size: 14px;
+}
+
+.circle {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border: 1px solid #f5d43b;
+  border-radius: 50%;
+  right: 8%;
+  top: 30%;
+  animation: rotate 18s linear infinite;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #f5d43b;
+  border-radius: 50%;
+  top: 15px;
+  left: 35px;
+}
+
+.marquee {
+  background: #f5d43b;
+  color: #11110f;
+  overflow: hidden;
+  padding: 17px 0;
+  white-space: nowrap;
+  font-family: 'Anton', sans-serif;
+  font-size: 28px;
+}
+
+.marquee div {
+  display: inline-block;
+  animation: slide 18s linear infinite;
+}
+
+section.content {
+  padding: 110px 8%;
+}
+
+.eyebrow {
+  color: #f5d43b;
+  letter-spacing: 3px;
+  font-size: 11px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(48px, 10vw, 100px);
+  line-height: 1;
+  margin-bottom: 25px;
+}
+
+.description {
+  color: #aaa79f;
+  line-height: 1.9;
+  max-width: 550px;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.card {
+  background: #20201c;
+  border: 1px solid #383830;
+  padding: 30px;
+  min-height: 190px;
+  transition: .35s;
+}
+
+.card:hover {
+  transform: translateY(-9px) rotate(-1deg);
+  background: #f5d43b;
+  color: #11110f;
+}
+
+.card h3 {
+  font-size: 23px;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: .7;
+}
+
+.contact {
+  background: #f5d43b;
+  color: #11110f;
+  padding: 90px 8%;
+}
+
+.contact a {
+  display: inline-block;
+  margin-top: 25px;
+  color: #11110f;
+  font-weight: bold;
+}
+
+footer {
+  padding: 25px 8%;
+  color: #888;
+  font-size: 11px;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width:600px) {
+  .circle {
+    width: 150px;
+    height: 150px;
+    right: -35px;
+    top: 24%;
+    opacity: .5;
+  }
+  h1 { letter-spacing: -2px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="#">ARNAB®</a>
+  <a href="#contact">LET'S CONNECT ↗</a>
+</nav>
+
+<header class="hero">
+  <div class="circle"></div>
+  <div class="tag">WELCOME TO MY UNIVERSE — 2026</div>
+  <h1>HEY,<br>I'M <span>ARNAB.</span></h1>
+  <p>
+    Electrical engineer by education.
+    Curious mind by nature.
+    Exploring technology, music, art and everything in between.
+  </p>
+</header>
+
+<div class="marquee">
+  <div>
+    CREATIVE MIND ✳ ENGINEERING ✳ MUSIC ✳
+    EXPERIMENTS ✳ CREATIVE MIND ✳ ENGINEERING ✳
+    MUSIC ✳ EXPERIMENTS ✳
+  </div>
+</div>
+
+<section class="content" id="about">
+  <div class="eyebrow">01 / WHO AM I?</div>
+  <h2>NOT JUST<br>ANOTHER<br>ENGINEER.</h2>
+  <p class="description">
+    I'm Arnab, an Electrical Engineering graduate
+    pursuing my interests in Power & Energy,
+    renewable energy, technology and creative ideas.
+    This is my little corner of the internet.
+  </p>
+</section>
+
+<section class="content" id="work">
+  <div class="eyebrow">02 / SELECTED WORK</div>
+  <h2>THINGS I'VE<br>BUILT.</h2>
+
+  <div class="projects">
+    <div class="card">
+      <h3>01 — SMART GRID</h3>
+      <p>Electricity theft detection using smart meter data and MATLAB Simulink.</p>
+    </div>
+    <div class="card">
+      <h3>02 — POWER SYSTEM</h3>
+      <p>Load flow analysis of the IEEE 33-bus distribution system.</p>
+    </div>
+    <div class="card">
+      <h3>03 — RENEWABLES</h3>
+      <p>Exploring wind energy, solar energy and MPPT techniques.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="eyebrow">03 / BEYOND ENGINEERING</div>
+  <h2>MUSIC.<br>ART.<br>TRAVEL.</h2>
+  <p class="description">
+    Collecting moments, discovering sounds,
+    exploring places and finding inspiration
+    in unexpected things.
+  </p>
+</section>
+
+<section class="contact" id="contact">
+  <div class="eyebrow">04 / SAY HELLO</div>
+  <h2>LET'S<br>CONNECT.</h2>
+  <p>Have an interesting idea? Let's talk.</p>
+  <a href="mailto:yourmail@example.com">EMAIL ME ↗</a>
+</section>
+
+<footer>
+  © 2026 ARNAB — MADE WITH CURIOSITY.
+</footer>
+
+</body>
+</html>
