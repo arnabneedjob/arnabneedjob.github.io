@@ -1,26 +1,628 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090912">
+<title>ARNAB | My Little Universe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#090912;
+  --white:#f4f2ff;
+  --pink:#ff35a6;
+  --orange:#ff813d;
+  --purple:#a855f7;
+  --green:#57ff9a;
+  --cyan:#39f5ff;
+  --blue:#496bff;
+  --yellow:#fff04b;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:'Space Grotesk',sans-serif;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:var(--pink);color:white}
+
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  z-index:0;opacity:.12;
+  background-image:radial-gradient(#aaa .7px,transparent .7px);
+  background-size:5px 5px;
+}
+
+header,main,footer,.marquee{position:relative;z-index:1}
+
+/* CURSOR */
+.custom-cursor{
+  position:fixed;top:0;left:0;z-index:99999;
+  pointer-events:none;font-size:28px;
+  transform:translate(-50%,-50%);
+  filter:drop-shadow(0 0 8px var(--yellow));
+}
+.custom-cursor.active{
+  transform:translate(-50%,-50%) scale(1.7) rotate(35deg);
+}
+@media(pointer:fine){
+  body,a,button{cursor:none}
+}
+@media(pointer:coarse){
+  .custom-cursor{display:none}
+}
+
+/* NAVIGATION */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:18px 7%;background:rgba(9,9,18,.9);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #29293a;
+}
+.navbar{display:flex;justify-content:space-between;align-items:center}
+.logo{
+  font-family:Anton;font-size:27px;color:var(--cyan);
+  letter-spacing:2px;text-shadow:0 0 15px var(--cyan)
+}
+.logo span{color:var(--pink)}
+#navlinks{display:flex;gap:25px;align-items:center}
+#navlinks a{
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  transition:.3s
+}
+#navlinks a:hover{color:var(--pink);text-shadow:0 0 12px var(--pink)}
+#menuBtn{
+  display:none;background:none;border:1px solid var(--cyan);
+  color:var(--cyan);padding:7px 12px;border-radius:8px;
+  font-size:22px
+}
+
+/* SECTIONS */
+section{padding:110px 9%;position:relative}
+.section-label{
+  color:var(--green);font-size:12px;letter-spacing:4px;
+  font-weight:700;margin-bottom:20px
+}
+.section-title{
+  font-family:Anton;font-size:clamp(42px,7vw,85px);
+  text-transform:uppercase;line-height:1;margin-bottom:45px
+}
+.pink{color:var(--pink)}
+.cyan{color:var(--cyan)}
+.orange{color:var(--orange)}
+.green{color:var(--green)}
+.purple{color:var(--purple)}
+
+/* HERO */
+#home{
+  min-height:100vh;padding-top:130px;
+  display:flex;align-items:center;overflow:hidden
+}
+.hero-container{
+  width:100%;display:grid;
+  grid-template-columns:1.15fr .85fr;
+  align-items:center;gap:35px
+}
+.hero-tag{
+  display:inline-block;padding:9px 15px;
+  border:1px solid var(--green);border-radius:30px;
+  color:var(--green);font-size:11px;letter-spacing:2px;
+  margin-bottom:25px
+}
+.hero-title{
+  font-family:Anton;font-size:clamp(65px,10vw,135px);
+  line-height:.85;text-transform:uppercase;letter-spacing:-3px
+}
+.line-one{display:block;color:#c5d7ff;text-shadow:5px 5px var(--blue)}
+.line-two{
+  display:block;color:var(--pink);margin-top:12px;
+  text-shadow:5px 5px #7921a9;
+  animation:titleGlow 3s infinite alternate
+}
+@keyframes titleGlow{
+  to{text-shadow:5px 5px #7921a9,0 0 25px var(--pink)}
+}
+.hero-description{
+  margin-top:30px;max-width:460px;color:#b9b9cc;
+  font-size:15px;line-height:1.9
+}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;margin-top:35px}
+.btn{
+  display:inline-block;padding:13px 23px;
+  border:1px solid var(--cyan);border-radius:30px;
+  color:var(--cyan);font-size:12px;font-weight:700;
+  transition:.3s
+}
+.btn:hover{
+  background:var(--cyan);color:var(--bg);
+  box-shadow:0 0 25px var(--cyan);transform:translateY(-4px)
+}
+.btn-pink{border-color:var(--pink);color:var(--pink)}
+.btn-pink:hover{background:var(--pink);color:white;box-shadow:0 0 25px var(--pink)}
+
+/* CHARACTER */
+.character-area{
+  position:relative;min-height:470px;
+  display:flex;justify-content:center;align-items:center
+}
+.character-glow{
+  position:absolute;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(73,107,255,.35),rgba(255,53,166,.12),transparent 70%);
+  animation:pulse 4s infinite alternate
+}
+@keyframes pulse{to{transform:scale(1.3);opacity:.6}}
+.character{
+  position:relative;width:290px;height:365px;z-index:2;
+  animation:characterFloat 3s ease-in-out infinite
+}
+@keyframes characterFloat{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-16px) rotate(2deg)}
+}
+.head{
+  position:absolute;width:155px;height:165px;
+  background:#ffbd91;border:4px solid #171323;
+  border-radius:45% 45% 48% 48%;top:65px;left:68px;z-index:3;
+}
+.hair{
+  position:absolute;top:-10px;left:0;width:100%;height:45px;
+  background:#21172a;border-radius:50% 50% 20% 20%
+}
+.eye{
+  position:absolute;width:15px;height:24px;background:#21172a;
+  border-radius:50%;top:78px
+}
+.eye.left{left:37px}.eye.right{right:37px}
+.eye:after{
+  content:"";position:absolute;width:5px;height:6px;
+  background:white;top:4px;left:3px;border-radius:50%
+}
+.blush{
+  position:absolute;top:112px;width:23px;height:9px;
+  background:#ff819b;border-radius:50%
+}
+.blush.left{left:19px}.blush.right{right:19px}
+.mouth{
+  position:absolute;top:119px;left:70px;width:15px;height:8px;
+  border-bottom:2px solid #7a3546;border-radius:50%
+}
+.body-character{
+  position:absolute;width:190px;height:135px;
+  background:linear-gradient(135deg,#496bff,#7415d9);
+  border:4px solid #171323;border-radius:40px 40px 25px 25px;
+  top:220px;left:50px;z-index:2;
+  box-shadow:0 0 25px rgba(73,107,255,.5)
+}
+.shirt-mark{
+  position:absolute;width:55px;height:45px;
+  background:var(--cyan);border:3px solid white;
+  border-radius:12px;top:38px;left:63px
+}
+.arm{
+  position:absolute;width:48px;height:100px;
+  background:#ffbd91;border:3px solid #171323;
+  border-radius:30px;top:230px;z-index:1
+}
+.arm.left{left:20px;transform:rotate(12deg)}
+.arm.right{right:20px;transform:rotate(-12deg)}
+.cap{
+  position:absolute;top:34px;left:62px;width:165px;height:43px;
+  background:#653cff;border:4px solid #171323;
+  border-radius:70px 70px 10px 10px;z-index:5
+}
+.cap-brim{
+  position:absolute;width:95px;height:17px;
+  background:#ff35a6;border:3px solid #171323;
+  border-radius:50%;bottom:-11px;left:72px
+}
+.sticker{
+  position:absolute;top:8px;width:23px;height:23px;
+  border:3px solid #171323;border-radius:50%;z-index:10;
+  display:grid;place-items:center;font-size:11px;
+  font-weight:900;color:#111;transition:.25s
+}
+.sticker:hover{transform:translateY(-13px) scale(1.35) rotate(15deg)}
+.sticker.education{left:27px;background:var(--green)}
+.sticker.projects{left:65px;background:var(--orange)}
+.sticker.interests{left:103px;background:var(--cyan)}
+.float-item{position:absolute;font-size:30px;animation:floating 4s ease-in-out infinite}
+.float-item.one{top:45px;right:15px;color:var(--pink)}
+.float-item.two{bottom:65px;left:15px;color:var(--green);animation-delay:1s}
+.float-item.three{top:170px;left:0;color:var(--orange);animation-delay:2s}
+@keyframes floating{50%{transform:translateY(-20px) rotate(30deg)}}
+
+/* MARQUEE */
+.marquee{
+  background:var(--orange);color:#14101c;padding:15px 0;
+  overflow:hidden;transform:rotate(-1deg) scale(1.02);
+  border-block:3px solid #171323
+}
+.marquee-track{
+  display:flex;white-space:nowrap;width:max-content;
+  animation:marquee 25s linear infinite
+}
+.marquee-track span{
+  font-family:Anton;font-size:23px;padding-right:35px;letter-spacing:2px
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* EDUCATION */
+.education-grid,.project-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:25px
+}
+.education-card{
+  padding:35px;border:1px solid rgba(73,107,255,.6);
+  border-left:5px solid var(--purple);background:#11111f;
+  border-radius:12px;transition:.3s
+}
+.education-card:hover{
+  transform:translateY(-8px);border-color:var(--pink);
+  box-shadow:0 0 25px rgba(255,53,166,.15)
+}
+.education-card small{color:var(--orange);font-size:11px;letter-spacing:2px}
+.education-card h3{
+  color:var(--green);font-family:Anton;font-size:28px;margin:13px 0
+}
+.education-card p,.project-card p{
+  color:#b8b8c9;line-height:1.8;font-size:14px
+}
+
+/* PROJECTS */
+#projects{background:#0d0d19}
+.project-card{
+  position:relative;padding:32px;background:#151526;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;overflow:hidden;transition:.35s
+}
+.project-card:before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:5px;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan))
+}
+.project-card:hover{
+  transform:translateY(-10px) rotate(-1deg);
+  box-shadow:0 10px 35px rgba(73,107,255,.2)
+}
+.project-number{font-family:Anton;font-size:55px;color:rgba(255,255,255,.1)}
+.project-card h3{font-family:Anton;font-size:29px;margin:10px 0 15px;color:var(--cyan)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{
+  font-size:10px;padding:7px 11px;border:1px solid var(--pink);
+  border-radius:30px;color:var(--pink)
+}
+
+/* INTERESTS */
+.interest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.interest-card{
+  padding:30px 20px;text-align:center;border-radius:15px;
+  background:#151526;border:1px solid rgba(255,255,255,.1);
+  transition:.3s
+}
+.interest-card:hover{transform:scale(1.05) rotate(2deg);border-color:var(--green)}
+.interest-card .emoji{font-size:42px;display:block;margin-bottom:15px}
+.interest-card h3{font-family:Anton;font-size:22px;color:var(--orange)}
+
+/* CONTACT */
+#contact{text-align:center;background:#10101d}
+.contact-heading{
+  font-family:Anton;font-size:clamp(45px,8vw,95px);line-height:1;margin-bottom:25px
+}
+#contact p{color:#bdbdce;margin-bottom:30px}
+.contact-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:15px}
+.social-link{
+  padding:13px 25px;border:1px solid var(--purple);
+  color:var(--purple);border-radius:30px;font-size:13px;
+  font-weight:700;transition:.3s
+}
+.social-link:hover{background:var(--purple);color:white;box-shadow:0 0 20px var(--purple)}
+
+/* FOOTER */
+footer{
+  padding:25px;text-align:center;background:#080810;
+  color:#8b8b9e;font-size:12px;border-top:1px solid #252538
+}
+footer span{color:var(--pink)}
+
+/* REVEAL ANIMATION */
+.reveal{
+  opacity:0;transform:translateY(45px);
+  transition:opacity .8s ease,transform .8s ease
+}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+/* BACK TO TOP */
+#topBtn{
+  position:fixed;right:22px;bottom:22px;z-index:900;
+  width:43px;height:43px;border-radius:50%;
+  border:1px solid var(--cyan);background:#151526;
+  color:var(--cyan);font-size:21px;display:none
+}
+#topBtn.show{display:block}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+  header{padding:16px 5%}
+  #menuBtn{display:block}
+  #navlinks{
+    display:none;position:absolute;top:100%;left:0;width:100%;
+    padding:25px;background:#10101d;
+    flex-direction:column;align-items:center;gap:23px;
+    border-bottom:1px solid #333
+  }
+  #navlinks.open{display:flex}
+  .hero-container{grid-template-columns:1fr;text-align:center}
+  .hero-description{margin:25px auto}
+  .hero-buttons{justify-content:center}
+  .character-area{min-height:420px}
+  .education-grid,.project-grid{grid-template-columns:1fr}
+  .interest-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  section{padding:85px 6%}
+  .hero-title{font-size:76px}
+  .character{transform:scale(.85)}
+  .character-area{min-height:380px}
+  .interest-grid{grid-template-columns:1fr 1fr}
+  .project-card{padding:25px}
+  .section-title{font-size:52px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important
+  }
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="custom-cursor" id="customCursor">⭐</div>
+
+<header>
+  <nav class="navbar">
+    <a href="#home" class="logo">ARNAB<span>.</span></a>
+    <button id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div id="navlinks">
+      <a href="#home">Home</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#interests">Interests</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-tag">✦ ELECTRICAL ENGINEERING × CREATIVE MIND</div>
+      <h1 class="hero-title">
+        <span class="line-one">HEY, I'M</span>
+        <span class="line-two">ARNAB!</span>
+      </h1>
+      <p class="hero-description">
+        An Electrical Engineering enthusiast exploring power systems,
+        renewable energy, technology and creative ideas.
+        Welcome to my little universe!
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn">EXPLORE MY WORK ↗</a>
+        <a href="#contact" class="btn btn-pink">SAY HELLO ✦</a>
+      </div>
+    </div>
+
+    <div class="character-area">
+      <div class="character-glow"></div>
+      <span class="float-item one">✦</span>
+      <span class="float-item two">★</span>
+      <span class="float-item three">✧</span>
+
+      <div class="character">
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+
+        <div class="body-character">
+          <div class="shirt-mark"></div>
+        </div>
+
+        <div class="head">
+          <div class="hair"></div>
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="mouth"></div>
+        </div>
+
+        <div class="cap">
+          <a class="sticker education" href="#education" aria-label="Education">E</a>
+          <a class="sticker projects" href="#projects" aria-label="Projects">P</a>
+          <a class="sticker interests" href="#interests" aria-label="Interests">I</a>
+          <div class="cap-brim"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRAFFITI STRIP -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>CREATIVE MIND ✦ ELECTRICAL ENGINEER ✦ DREAM BIG ✦ KEEP EXPLORING ✦ </span>
+    <span>CREATIVE MIND ✦ ELECTRICAL ENGINEER ✦ DREAM BIG ✦ KEEP EXPLORING ✦ </span>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <div class="section-label">// 01 — MY JOURNEY</div>
+    <h2 class="section-title">EDU<span class="pink">CATION</span></h2>
+  </div>
+
+  <div class="education-grid">
+    <article class="education-card reveal">
+      <small>UNDERGRADUATE</small>
+      <h3>B.Tech Electrical Engineering</h3>
+      <p>Jorhat Engineering College</p>
+      <p>Explored electrical machines, power systems,
+      electrical circuits and engineering fundamentals.</p>
+    </article>
+
+    <article class="education-card reveal">
+      <small>POSTGRADUATE</small>
+      <h3>M.Tech Electrical Engineering</h3>
+      <p>Specialization: Power & Energy</p>
+      <p>Exploring advanced power systems, renewable energy
+      integration and modern electrical technologies.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">// 02 — THINGS I'VE BUILT</div>
+    <h2 class="section-title">MY <span class="cyan">PROJECTS</span></h2>
+  </div>
+
+  <div class="project-grid">
+
+    <article class="project-card reveal">
+      <div class="project-number">01</div>
+      <h3>IEEE 33-BUS LOAD FLOW ANALYSIS</h3>
+      <p>
+        Comparative study of load flow analysis on the IEEE
+        33-bus radial distribution system using iterative
+        numerical and metaheuristic optimization techniques.
+      </p>
+      <div class="tags">
+        <span>MATLAB</span>
+        <span>POWER SYSTEM</span>
+        <span>GA</span>
+        <span>PSO</span>
+        <span>LOAD FLOW</span>
+      </div>
+    </article>
+
+    <article class="project-card reveal">
+      <div class="project-number">02</div>
+      <h3>SMART GRID ELECTRICITY THEFT DETECTION</h3>
+      <p>
+        Smart meter-based electricity theft detection using
+        power balance analysis, MATLAB Simulink modelling
+        and Decision Tree classification.
+      </p>
+      <div class="tags">
+        <span>SMART GRID</span>
+        <span>SIMULINK</span>
+        <span>MATLAB</span>
+        <span>DECISION TREE</span>
+        <span>ENERGY MONITORING</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests">
+  <div class="reveal">
+    <div class="section-label">// 03 — OUTSIDE THE CIRCUITS</div>
+    <h2 class="section-title">MY <span class="orange">VIBES</span></h2>
+  </div>
+
+  <div class="interest-grid">
+    <div class="interest-card reveal">
+      <span class="emoji">🎧</span>
+      <h3>MUSIC</h3>
+    </div>
+    <div class="interest-card reveal">
+      <span class="emoji">✈️</span>
+      <h3>TRAVEL</h3>
+    </div>
+    <div class="interest-card reveal">
+      <span class="emoji">🎨</span>
+      <h3>CREATIVITY</h3>
+    </div>
+    <div class="interest-card reveal">
+      <span class="emoji">💻</span>
+      <h3>TECHNOLOGY</h3>
+    </div>
+    <div class="interest-card reveal">
+      <span class="emoji">⚡</span>
+      <h3>RENEWABLE ENERGY</h3>
+    </div>
+    <div class="interest-card reveal">
+      <span class="emoji">🌌</span>
+      <h3>EXPLORING</h3>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">// 04 — LET'S CONNECT</div>
+    <h2 class="contact-heading">
+      GOT AN <span class="pink">IDEA?</span><br>
+      LET'S <span class="cyan">CREATE!</span>
+    </h2>
+    <p>Always open to interesting conversations and collaborations.</p>
+
+    <div class="contact-buttons">
+      <!-- Replace these example links with your own -->
+      <a class="social-link" href="mailto:YOUR_EMAIL@gmail.com">EMAIL ↗</a>
+      <a class="social-link" href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+      <a class="social-link" href="https://www.linkedin.com/in/YOUR_USERNAME/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>MADE WITH <span>♥</span> & A LITTLE BIT OF CHAOS</p>
+  <p>© <span id="year"></span> ARNAB. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<button id="topBtn" aria-label="Back to top">↑</button>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 1. SCROLL REVEAL ANIMATION
+  // 1. SCROLL REVEAL
   const revealElements = document.querySelectorAll(".reveal");
 
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-  revealElements.forEach(element => {
-    revealObserver.observe(element);
-  });
-
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add("show"));
+  }
 
   // 2. MOBILE MENU
   const menuBtn = document.querySelector("#menuBtn");
@@ -28,53 +630,93 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (menuBtn && links) {
     menuBtn.addEventListener("click", () => {
-      links.classList.toggle("open");
-
-      menuBtn.setAttribute(
-        "aria-expanded",
-        links.classList.contains("open")
-      );
+      const isOpen = links.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.textContent = isOpen ? "✕" : "☰";
     });
 
     links.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         links.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "☰";
       });
     });
   }
-
 
   // 3. AUTOMATIC COPYRIGHT YEAR
-  const yearElement = document.querySelector("#year");
-
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+  const year = document.querySelector("#year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
   }
 
+  // 4. CUSTOM STAR CURSOR + SPARKLE TRAIL
+  const cursor = document.querySelector("#customCursor");
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  // 4. CUSTOM STAR CURSOR
-  const cursor = document.querySelector(".custom-cursor");
+  if (cursor && finePointer) {
+    let lastSparkle = 0;
 
-  if (cursor && window.matchMedia("(pointer: fine)").matches) {
-    document.addEventListener("mousemove", event => {
-      cursor.style.left = event.clientX + "px";
-      cursor.style.top = event.clientY + "px";
+    document.addEventListener("mousemove", e => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+
+      const now = Date.now();
+
+      if (now - lastSparkle > 65 &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const sparkle = document.createElement("span");
+        sparkle.textContent = "✦";
+
+        Object.assign(sparkle.style, {
+          position: "fixed",
+          left: e.clientX + "px",
+          top: e.clientY + "px",
+          color: "#fff04b",
+          fontSize: "12px",
+          pointerEvents: "none",
+          zIndex: "99998",
+          animation: "sparkleFade .65s ease-out forwards"
+        });
+
+        document.body.appendChild(sparkle);
+        sparkle.addEventListener("animationend", () => sparkle.remove());
+
+        lastSparkle = now;
+      }
     });
 
-    document.querySelectorAll("a, button").forEach(element => {
-      element.addEventListener("mouseenter", () => {
-        cursor.classList.add("cursor-hover");
-      });
+    document.querySelectorAll("a,button,.sticker").forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("active"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
+    });
 
-      element.addEventListener("mouseleave", () => {
-        cursor.classList.remove("cursor-hover");
-      });
+    document.addEventListener("mousedown", () => cursor.classList.add("active"));
+    document.addEventListener("mouseup", () => cursor.classList.remove("active"));
+  }
+
+  // 5. BACK TO TOP
+  const topBtn = document.querySelector("#topBtn");
+
+  if (topBtn) {
+    window.addEventListener("scroll", () => {
+      topBtn.classList.toggle("show", window.scrollY > 400);
+    });
+
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
 });
 </script>
+
+<style>
+@keyframes sparkleFade {
+  from { opacity:1; transform:scale(1) rotate(0deg); }
+  to { opacity:0; transform:scale(0) translateY(-20px) rotate(150deg); }
+}
+</style>
 
 </body>
 </html>
